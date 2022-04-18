@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:4.4.6
+    container_name: mongodb
+#    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGO_INITDB_DATABASE
+      - DATABASE_USERNAME=$DATABASE_USERNAME
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - MONGO_PORT=$MONGO_PORT
+    volumes:
+      - /home/kcd0Data/mongodb/db:/data/db
+      - ./docker_scripts/:/docker-entrypoint-initdb.d
+      - /home/kcd0Data/mongodb/mongod.conf:/etc/mongod.conf
+    networks:
+      - local_network
+    ports:
+      - 61072:27017
+

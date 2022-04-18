@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.17-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./data/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    restart: always
+    tty: true
+
+  admin:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    command: npm run start:dev
+    container_name: nestjs
+    ports:
+      - "8080:3000"
+    image: node:16
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./src:/usr/src/app/src/node_modules
+    restart: always
+    tty: true
+    working_dir: /usr/src/app/src
