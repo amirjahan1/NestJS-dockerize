@@ -17,8 +17,6 @@ services:
       - /home/kcd0Data/mongodb/db:/data/db
       - ./docker_scripts/:/docker-entrypoint-initdb.d
       - /home/kcd0Data/mongodb/mongod.conf:/etc/mongod.conf
-    networks:
-      - local_network
     ports:
       - 61072:27017
 

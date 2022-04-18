@@ -8,8 +8,8 @@ services:
       - "80:80"
     volumes:
       - ./data/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    restart: always
-    tty: true
+#    restart: always
+#    tty: true
 
   admin:
     build:
@@ -23,6 +23,6 @@ services:
     volumes:
       - ./src:/usr/src/app/src
       - ./src:/usr/src/app/src/node_modules
-    restart: always
-    tty: true
+#    restart: always
+#    tty: true
     working_dir: /usr/src/app/src
